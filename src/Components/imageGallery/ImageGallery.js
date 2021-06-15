@@ -21,7 +21,6 @@ const ImageGallery = ({ hits, openModal }) => {
 ImageGallery.propTypes = {
   hits: PropTypes.array.isRequired,
   openModal: PropTypes.func.isRequired,
-  modalImage: PropTypes.string.isRequired,
 };
 
 export default ImageGallery;
