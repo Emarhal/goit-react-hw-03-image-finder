@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./Button.module.css";
+import PropTypes from "prop-types";
 
 const Button = ({ showMore }) => {
   return (
@@ -9,6 +10,10 @@ const Button = ({ showMore }) => {
       </button>
     </>
   );
+};
+
+Button.propTypes = {
+  showMore: PropTypes.func.isRequired,
 };
 
 export default Button;

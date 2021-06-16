@@ -22,23 +22,17 @@ class App extends Component {
       prevState.search !== this.state.search ||
       prevState.page !== this.state.page
     ) {
-      window.scrollTo({
-        top: document.documentElement.scrollHeight,
-        behavior: "smooth",
-      });
       this.handleSearchProducts();
     }
   }
 
   openModal = (modalImage) => {
     this.setState({ isModalOpen: true, modalImage });
-    window.addEventListener("keydown", this.closeModal);
   };
 
   closeModal = (evt) => {
     if (evt.target === evt.currentTarget || evt.key === "Escape")
       this.setState({ isModalOpen: false });
-    window.removeEventListener("keydown", this.closeModal);
   };
 
   handleSearchProducts = async () => {
@@ -58,6 +52,10 @@ class App extends Component {
       this.setState({ error: error.response.hits });
     } finally {
       this.setState({ loading: false });
+      window.scrollTo({
+        top: document.documentElement.scrollHeight,
+        behavior: "smooth",
+      });
     }
   };
 
@@ -76,7 +74,7 @@ class App extends Component {
         <Searchbar searchProducts={this.handleSubmit} />
         {loading && <Loader />}
         <ImageGallery hits={hits} openModal={this.openModal} />
-        {hits.length > 0 && <Button showMore={this.showMore} />}
+        {!!hits.length && <Button showMore={this.showMore} />}
         {isModalOpen && (
           <Modal modalImage={modalImage} closeModal={this.closeModal} />
         )}
